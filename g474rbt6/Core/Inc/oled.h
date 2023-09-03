@@ -27,6 +27,7 @@ u32 oled_pow(u8 m,u8 n);
 void OLED_ShowNum(u8 x,u8 y,u32 num,u8 len,u8 size2);//size2(16|12)
 void OLEDShowData(u8 x,u8 y,u8 temp);
 
-
+void Draw_Logo1(void);
+void OLED_SHOW(void);
 
 #endif

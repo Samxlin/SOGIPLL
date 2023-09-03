@@ -26,6 +26,7 @@
 #include <string.h> 
 #include "usart.h"
 #include "math.h"
+#include "key.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -381,6 +382,8 @@ void TIM2_IRQHandler(void)
 	SOGI(&Vout);
 	PLL(&Vout);	
 	
+	phaseangle=Vout.phaseAngle*1000;
+	
 	IL.in = ADC_ConvertedValue[3];  //VO+ - VO-
 	IL.in -= 2048;	
 	SOGI(&IL);
@@ -415,6 +418,7 @@ void TIM3_IRQHandler(void)
 	memcpy(tempData, (uint8_t*)&temp, sizeof(temp));
 	HAL_UART_Transmit_DMA(&huart3, tempData, 20);
 	
+	Botton_Process(); //°´¼ü´¦Àí
   /* USER CODE END TIM3_IRQn 1 */
 }
 

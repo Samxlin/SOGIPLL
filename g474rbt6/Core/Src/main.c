@@ -30,6 +30,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "oled.h"
+#include "key.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,6 +51,8 @@
 
 /* USER CODE BEGIN PV */
 uint16_t ADC_ConvertedValue[5]={0,0,0,0,0};
+
+int phaseangle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -113,7 +116,7 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim2);
 	HAL_TIM_Base_Start_IT(&htim3);
 	
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10|GPIO_PIN_11, GPIO_PIN_RESET);
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);//ADC1模块自校正
 	HAL_Delay(50);//延时50ms
 	
@@ -122,9 +125,11 @@ int main(void)
     Error_Handler();
   }
 	
+	KEY_Init();
 	OLED_Init();
 	OLED_CLS();
 	OLED_ShowStr(25,0,"SOGI PLL",2);
+	OLED_ShowStr(10,2,"Angle :  ",1);
 	OLED_ON(); 
 	
   /* USER CODE END 2 */
@@ -134,8 +139,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+		
     /* USER CODE BEGIN 3 */
+		HAL_Delay(100);
+		OLED_SHOW();
   }
   /* USER CODE END 3 */
 }

@@ -32,6 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+extern int phaseangle;
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
